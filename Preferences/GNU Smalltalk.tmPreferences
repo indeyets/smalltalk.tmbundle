@@ -8,6 +8,33 @@
 	<string>source.smalltalk.gnu</string>
 	<key>settings</key>
 	<dict>
+		<key>shellVariables</key>
+		<array>
+			<dict>
+				<key>name</key>
+				<string>TM_COMMENT_START</string>
+				<key>value</key>
+				<string>"</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>TM_COMMENT_END</string>
+				<key>value</key>
+				<string>"</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>TM_COMMENT_START_3</string>
+				<key>value</key>
+				<string>'</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>TM_COMMENT_END_3</string>
+				<key>value</key>
+				<string>'</string>
+			</dict>
+		</array>
 		<key>spellchecking</key>
 		<integer>0</integer>
 	</dict>
