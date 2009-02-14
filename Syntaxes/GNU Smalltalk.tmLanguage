@@ -18,15 +18,20 @@
 	<array>
 		<dict>
 			<key>begin</key>
-			<string>^!([A-Z][A-Za-z0-9]+)(?: class)? methodsFor: '(.*)'!$</string>
+			<string>^(!([A-Z][A-Za-z0-9]+)(?: class)? methodsFor: '(.*)'!)$</string>
 			<key>captures</key>
 			<dict>
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.class.smalltalk</string>
+					<string>meta.declaration.methods.section.name.smalltalk</string>
 				</dict>
 				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.class.smalltalk</string>
+				</dict>
+				<key>3</key>
 				<dict>
 					<key>name</key>
 					<string>entity.name.section.smalltalk</string>
@@ -40,20 +45,30 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>^\s+(([a-z0-9][a-zA-Z0-9]*:)\s([a-z0-9][a-zA-Z0-9]*))*\s([a-z0-9][a-zA-Z0-9]*)$</string>
+					<string>^((?:(?:\s+([a-z0-9][a-zA-Z0-9]*:)\s([a-z0-9][a-zA-Z0-9]*))+(?:\s([a-z0-9][a-zA-Z0-9]*))?|\s+([a-z0-9][a-zA-Z0-9]*)))\s*$</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>entity.name.function.smalltalk</string>
+							<string>meta.declaration.methods.method.name.smalltalk</string>
 						</dict>
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>variable.parameter.smalltalk</string>
+							<string>entity.name.function.smalltalk</string>
 						</dict>
 						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>variable.parameter.smalltalk</string>
+						</dict>
+						<key>4</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.smalltalk</string>
+						</dict>
+						<key>5</key>
 						<dict>
 							<key>name</key>
 							<string>entity.name.function.smalltalk</string>
@@ -88,27 +103,41 @@
 								</dict>
 							</array>
 						</dict>
+						<dict>
+							<key>match</key>
+							<string>\^</string>
+							<key>name</key>
+							<string>keyword.operator.return.smalltalk</string>
+						</dict>
+						<dict>
+							<key>match</key>
+							<string>\b(super|self|thisContext)\b</string>
+							<key>name</key>
+							<string>variable.language.smalltalk</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#operators</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#constants</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#strings</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#classes</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#methods</string>
+						</dict>
 					</array>
 				</dict>
 			</array>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\^</string>
-			<key>name</key>
-			<string>keyword.operator.return.smalltalk</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\.</string>
-			<key>name</key>
-			<string>punctuation.separator.statement.smalltalk</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>;</string>
-			<key>name</key>
-			<string>punctuation.separator.cascade.smalltalk</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -117,242 +146,347 @@
 			<string>punctuation.section.scope.smalltalk</string>
 		</dict>
 		<dict>
-			<key>match</key>
-			<string>\:\=</string>
-			<key>name</key>
-			<string>keyword.operator.assignment.smalltalk</string>
+			<key>include</key>
+			<string>#operators</string>
 		</dict>
 		<dict>
-			<key>match</key>
-			<string>&lt;|&gt;|&lt;=|&gt;=|=|~=|==|~~|=~</string>
-			<key>name</key>
-			<string>keyword.operator.comparison.smalltalk</string>
+			<key>include</key>
+			<string>#constants</string>
 		</dict>
 		<dict>
-			<key>match</key>
-			<string>\s+(and|or|\||&amp;)\s+</string>
-			<key>name</key>
-			<string>keyword.operator.logical.smalltalk</string>
+			<key>include</key>
+			<string>#strings</string>
 		</dict>
 		<dict>
-			<key>match</key>
-			<string>(\\\\|\*|\+|\-|/)</string>
-			<key>name</key>
-			<string>keyword.operator.arithmetic.smalltalk</string>
+			<key>include</key>
+			<string>#classes</string>
 		</dict>
 		<dict>
-			<key>match</key>
-			<string>(,)</string>
-			<key>name</key>
-			<string>keyword.operator.lists.smalltalk</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>&lt;&lt;</string>
-			<key>name</key>
-			<string>keyword.operator.stream.smalltalk</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(nil|true|false)\b</string>
-			<key>name</key>
-			<string>constant.language.smalltalk</string>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>"</string>
-			<key>end</key>
-			<string>"</string>
-			<key>name</key>
-			<string>comment.smalltalk</string>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>'</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>0</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.string.begin.smalltalk</string>
-				</dict>
-			</dict>
-			<key>end</key>
-			<string>'</string>
-			<key>endCaptures</key>
-			<dict>
-				<key>0</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.string.end.smalltalk</string>
-				</dict>
-			</dict>
-			<key>name</key>
-			<string>string.quoted.single.smalltalk</string>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>\#\(</string>
-			<key>end</key>
-			<string>\)</string>
-			<key>name</key>
-			<string>string.quoted.other.smalltalk</string>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>\#\[</string>
-			<key>end</key>
-			<string>\]</string>
-			<key>name</key>
-			<string>string.quoted.other.smalltalk</string>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>\{</string>
-			<key>end</key>
-			<string>\}</string>
-			<key>name</key>
-			<string>string.quoted.other.smalltalk</string>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>\#\{</string>
-			<key>end</key>
-			<string>\}</string>
-			<key>name</key>
-			<string>string.quoted.othersmalltalk</string>
-		</dict>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.constant.smalltalk</string>
-				</dict>
-			</dict>
-			<key>comment</key>
-			<string>symbols</string>
-			<key>match</key>
-			<string>(#)([a-zA-Z][a-zA-Z0-9]*)</string>
-			<key>name</key>
-			<string>constant.other.symbol.smalltalk</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(Smalltalk|Object|Compiler)\b</string>
-			<key>name</key>
-			<string>support.class.base.smalltalk</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(Character|String|Boolean|Array|OrderedCollection|Dictionary|Random|Float|Double|Fraction|FixedPoint|Integer|SmallInteger|LargeInteger)\b</string>
-			<key>name</key>
-			<string>support.class.type.smalltalk</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(SharedQueue|Semaphore|Future|LazyValue)\b</string>
-			<key>name</key>
-			<string>support.class.threading.smalltalk</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(new)\b</string>
-			<key>name</key>
-			<string>support.function.constructor.smalltalk</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(finalizableObjects|initialize|dependencies)( |\.|;|$)</string>
-			<key>name</key>
-			<string>support.function.class.smalltalk</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(addToBeFinalized|allOwners|asOop|asValue|badReturnError|basicPrint|basicPrintNl|basicSize|binaryRepresentationObject|changed|class|copy|deepCopy|dependents|display|displayNl|displayString|finalize|halt|hash|identityHash|inspect|isArray|isBehavior|isCObject|isCharacter|isCharacterArray|isClass|isFloat|isInteger|isMeta|isMetaClass|isMetaclass|isNamespace|isNil|isNumber|isReadOnly|isSmallInteger|isString|isSymbol|isUntrusted|makeEphemeron|makeFixed|makeWeak|mourn|mustBeBoolean|nextInstance|noRunnableProcess|notNil|notYetImplemented|postCopy|postLoad|postStore|preStore|primitiveFailed|print|printNl|printString|reconstructOriginalObject|release|removeToBeFinalized|shallowCopy|shouldNotImplement|size|species|store|storeNl|storeString|subclassResponsibility|tenure|userInterrupt|validSize|yourself)( |\.|;|$)</string>
-			<key>name</key>
-			<string>support.function.object.smalltalk</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(addDependent|at|atput|basicAt|basicPrintOn|become|broadcast|changeClassTo|changed|checkIndexableBounds|displayOn|doesNotUnderstand|error|halt|ifNil|ifNotNil|instVarAt|instVarNamed|isKindOf|isMemberOf|makeReadOnly|makeUntrusted|mark|perform|printOn|removeDependent|respondsTo|storeLiteralOn|storeOn|update):</string>
-			<key>name</key>
-			<string>support.function.object.smalltalk</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(asByteArray|asFile|asRegex|asString|asSymbol|encoding|isLiteralObject)( |\.|;|$)</string>
-			<key>name</key>
-			<string>support.function.string.smalltalk</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(allOccurrencesOfRegex|asCData|byteAt|indexOfRegex|matchRegex|occurrencesOfRegex|searchRegex|similarityTo|tokenize):</string>
-			<key>name</key>
-			<string>support.function.string.smalltalk</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(atEnd|close|contents|cr|crTab|encoding|file|fileIn|flush|isExternalStream|isPositionable|isSequenceable|isUnicode|lines|name|next|nextLine|nl|nlTab|pastEnd|peek|skipSeparators|space|tab|upToEnd)( |\.|;|$)</string>
-			<key>name</key>
-			<string>support.function.stream.smalltalk</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(collect|display|do|fileOut|linesDo|next|nextAvailable|nextAvailablePutAllOn|nextMatchFor|nextPut|nextPutAll|nextPutAllFlush|nextPutAllOn|peekFor|prefixTableFor|print|readStream|reject|select|skip|skipTo|skipToAll|space|splitAt|store|tab|upTo|upToAll|with):</string>
-			<key>name</key>
-			<string>support.function.stream.smalltalk</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(-?[0-9]+\.[0-9]+)\b</string>
-			<key>name</key>
-			<string>constant.numeric.decimal.smalltalk</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(-?[0-9]+E[0-9]+)\b</string>
-			<key>name</key>
-			<string>constant.numeric.decimal.smalltalk</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(-?[0-9]+)\b</string>
-			<key>name</key>
-			<string>constant.numeric.integer.smalltalk</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(2r[0-1]+)\b</string>
-			<key>name</key>
-			<string>constant.numeric.other.smalltalk</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(8r[0-7]+)\b</string>
-			<key>name</key>
-			<string>constant.numeric.other.smalltalk</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(16r[0-9a-f]+)\b</string>
-			<key>name</key>
-			<string>constant.numeric.other.smalltalk</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(super|self|thisContext)\b</string>
-			<key>name</key>
-			<string>variable.language.smalltalk</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b([A-Z][A-Za-z0-9]+)\b</string>
-			<key>name</key>
-			<string>entity.name.class.smalltalk</string>
+			<key>include</key>
+			<string>#methods</string>
 		</dict>
 	</array>
+	<key>repository</key>
+	<dict>
+		<key>classes</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\b(Smalltalk|Object|Compiler)\b</string>
+					<key>name</key>
+					<string>support.class.base.smalltalk</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b(Character|String|Boolean|Array|OrderedCollection|Dictionary|Random|Float|Double|Fraction|FixedPoint|Integer|SmallInteger|LargeInteger)\b</string>
+					<key>name</key>
+					<string>support.class.type.smalltalk</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b(SharedQueue|Semaphore|Future|LazyValue)\b</string>
+					<key>name</key>
+					<string>support.class.threading.smalltalk</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b([A-Z][A-Za-z0-9]+)\b</string>
+					<key>name</key>
+					<string>entity.name.class.smalltalk</string>
+				</dict>
+			</array>
+		</dict>
+		<key>constants</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\b(nil|true|false)\b</string>
+					<key>name</key>
+					<string>constant.language.smalltalk</string>
+				</dict>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.constant.smalltalk</string>
+						</dict>
+					</dict>
+					<key>comment</key>
+					<string>symbols</string>
+					<key>match</key>
+					<string>(#)([a-zA-Z][a-zA-Z0-9]*)</string>
+					<key>name</key>
+					<string>constant.other.symbol.smalltalk</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b(-?[0-9]+\.[0-9]+)\b</string>
+					<key>name</key>
+					<string>constant.numeric.decimal.smalltalk</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b(-?[0-9]+E[0-9]+)\b</string>
+					<key>name</key>
+					<string>constant.numeric.decimal.smalltalk</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b(-?[0-9]+)\b</string>
+					<key>name</key>
+					<string>constant.numeric.integer.smalltalk</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b(2r[0-1]+)\b</string>
+					<key>name</key>
+					<string>constant.numeric.other.smalltalk</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b(8r[0-7]+)\b</string>
+					<key>name</key>
+					<string>constant.numeric.other.smalltalk</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b(16r[0-9a-f]+)\b</string>
+					<key>name</key>
+					<string>constant.numeric.other.smalltalk</string>
+				</dict>
+			</array>
+		</dict>
+		<key>methods</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\s(new)\b</string>
+					<key>name</key>
+					<string>support.function.constructor.smalltalk</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\s(finalizableObjects|initialize|dependencies)( |\.|;|$)</string>
+					<key>name</key>
+					<string>support.function.class.smalltalk</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\s(addToBeFinalized|allOwners|asOop|asValue|badReturnError|basicPrint|basicPrintNl|basicSize|binaryRepresentationObject|changed|class|copy|deepCopy|dependents|display|displayNl|displayString|finalize|halt|hash|identityHash|inspect|isArray|isBehavior|isCObject|isCharacter|isCharacterArray|isClass|isFloat|isInteger|isMeta|isMetaClass|isMetaclass|isNamespace|isNil|isNumber|isReadOnly|isSmallInteger|isString|isSymbol|isUntrusted|makeEphemeron|makeFixed|makeWeak|mourn|mustBeBoolean|nextInstance|noRunnableProcess|notNil|notYetImplemented|postCopy|postLoad|postStore|preStore|primitiveFailed|print|printNl|printString|reconstructOriginalObject|release|removeToBeFinalized|shallowCopy|shouldNotImplement|size|species|store|storeNl|storeString|subclassResponsibility|tenure|userInterrupt|validSize|yourself)( |\.|;|$)</string>
+					<key>name</key>
+					<string>support.function.object.smalltalk</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\s((?:addDependent|at|atput|basicAt|basicPrintOn|become|broadcast|changeClassTo|changed|checkIndexableBounds|displayOn|doesNotUnderstand|error|halt|ifNil|ifNotNil|instVarAt|instVarNamed|isKindOf|isMemberOf|makeReadOnly|makeUntrusted|mark|perform|printOn|removeDependent|respondsTo|storeLiteralOn|storeOn|update):)</string>
+					<key>name</key>
+					<string>support.function.object.smalltalk</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\s(asByteArray|asFile|asRegex|asString|asSymbol|encoding|isLiteralObject)( |\.|;|$)</string>
+					<key>name</key>
+					<string>support.function.string.smalltalk</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\s((?:allOccurrencesOfRegex|asCData|byteAt|indexOfRegex|matchRegex|occurrencesOfRegex|searchRegex|similarityTo|tokenize):)</string>
+					<key>name</key>
+					<string>support.function.string.smalltalk</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\s(atEnd|close|contents|cr|crTab|encoding|file|fileIn|flush|isExternalStream|isPositionable|isSequenceable|isUnicode|lines|name|next|nextLine|nl|nlTab|pastEnd|peek|skipSeparators|space|tab|upToEnd)( |\.|;|$)</string>
+					<key>name</key>
+					<string>support.function.stream.smalltalk</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\s((?:collect|display|do|fileOut|linesDo|next|nextAvailable|nextAvailablePutAllOn|nextMatchFor|nextPut|nextPutAll|nextPutAllFlush|nextPutAllOn|peekFor|prefixTableFor|print|readStream|reject|select|skip|skipTo|skipToAll|space|splitAt|store|tab|upTo|upToAll|with):)</string>
+					<key>name</key>
+					<string>support.function.stream.smalltalk</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\s([a-z][a-zA-Z0-9]+:)</string>
+					<key>name</key>
+					<string>meta.function-call.smalltalk</string>
+				</dict>
+			</array>
+		</dict>
+		<key>operators</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\.</string>
+					<key>name</key>
+					<string>punctuation.separator.statement.smalltalk</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>;</string>
+					<key>name</key>
+					<string>punctuation.separator.cascade.smalltalk</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\:\=</string>
+					<key>name</key>
+					<string>keyword.operator.assignment.smalltalk</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>&lt;|&gt;|&lt;=|&gt;=|=|~=|==|~~|=~</string>
+					<key>name</key>
+					<string>keyword.operator.comparison.smalltalk</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\s+(and|or|\||&amp;)\s+</string>
+					<key>name</key>
+					<string>keyword.operator.logical.smalltalk</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(\\\\|\*|\+|\-|/)</string>
+					<key>name</key>
+					<string>keyword.operator.arithmetic.smalltalk</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(,)</string>
+					<key>name</key>
+					<string>keyword.operator.lists.smalltalk</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>&lt;&lt;</string>
+					<key>name</key>
+					<string>keyword.operator.stream.smalltalk</string>
+				</dict>
+			</array>
+		</dict>
+		<key>strings</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>"</string>
+					<key>end</key>
+					<string>"</string>
+					<key>name</key>
+					<string>comment.smalltalk</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>'</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.smalltalk</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>'</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.smalltalk</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>string.quoted.single.smalltalk</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>\#\(</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.smalltalk</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>\)</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.smalltalk</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>string.quoted.other.smalltalk</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>\#\[</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.smalltalk</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>\]</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.smalltalk</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>string.quoted.other.smalltalk</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(?:\#)?\{</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.smalltalk</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>\}</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.smalltalk</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>string.quoted.other.smalltalk</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
 	<key>scopeName</key>
 	<string>source.smalltalk.gnu</string>
 	<key>uuid</key>
