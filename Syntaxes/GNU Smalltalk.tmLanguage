@@ -174,21 +174,9 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>\b(Smalltalk|Object|Compiler)\b</string>
+					<string>\b(AbstractNamespace|AlternativeObjectProxy|ArithmeticError|Array|ArrayedCollection|Association|Autoload|Bag|Behavior|BindingDictionary|BlockClosure|BlockContext|Boolean|ByteArray|CAggregate|CArray|CArrayCType|CBoolean|CByte|CCallable|CCallbackDescriptor|CChar|CCompound|CDouble|CFloat|CFunctionDescriptor|CInt|CLong|CLongDouble|CObject|CPtr|CPtrCType|CScalar|CScalarCType|CShort|CSmalltalk|CString|CStringCType|CStruct|CType|CUChar|CUInt|CULong|CUShort|CUnion|CallinProcess|Character|CharacterArray|Class|ClassDescription|Collection|CompiledBlock|CompiledCode|CompiledMethod|ContextPart|Continuation|DLD|Date|DateTime|DeferredVariableBinding|Delay|DelayedAdaptor|Dictionary|DirectedMessage|Directory|DumperProxy|Duration|Error|Exception|ExceptionSet|False|File|FileDescriptor|FilePath|FileSegment|FileStream|Float|FloatD|FloatE|FloatQ|Fraction|Generator|Getopt|Halt|HashedCollection|HomedAssociation|IdentityDictionary|IdentitySet|Integer|Interval|Iterable|Kernel.PackageInfo|Kernel.TrappableEvent|LargeArray|LargeArrayedCollection|LargeByteArray|LargeInteger|LargeNegativeInteger|LargePositiveInteger|LargeWordArray|LargeZeroInteger|Link|LinkedList|LookupKey|LookupTable|Magnitude|MappedCollection|Memory|Message|MessageNotUnderstood|Metaclass|MethodContext|MethodDictionary|MethodInfo|Namespace|NetClients.URIResolver|NetClients.URL|Notification|NullProxy|NullValueHolder|Number|Object|ObjectDumper|ObjectMemory|OrderedCollection|Package|PackageLoader|Permission|PluggableAdaptor|PluggableProxy|Point|PositionableStream|Process|ProcessEnvironment|ProcessorScheduler|Promise|Random|ReadStream|ReadWriteStream|Rectangle|RecursionLock|Regex|RegexResults|RootNamespace|RunArray|ScaledDecimal|SecurityPolicy|Semaphore|SequenceableCollection|Set|SharedQueue|Signal|SingletonProxy|SmallInteger|SortedCollection|Stream|String|SymLink|Symbol|SystemDictionary|SystemExceptions.AlreadyDefined|SystemExceptions.ArgumentOutOfRange|SystemExceptions.BadReturn|SystemExceptions.CInterfaceError|SystemExceptions.EmptyCollection|SystemExceptions.EndOfStream|SystemExceptions.FileError|SystemExceptions.IndexOutOfRange|SystemExceptions.InvalidArgument|SystemExceptions.InvalidProcessState|SystemExceptions.InvalidSize|SystemExceptions.InvalidValue|SystemExceptions.MustBeBoolean|SystemExceptions.MutationError|SystemExceptions.NoRunnableProcess|SystemExceptions.NotEnoughElements|SystemExceptions.NotFound|SystemExceptions.NotImplemented|SystemExceptions.NotIndexable|SystemExceptions.NotYetImplemented|SystemExceptions.PackageNotAvailable|SystemExceptions.PrimitiveFailed|SystemExceptions.ProcessBeingTerminated|SystemExceptions.ProcessTerminated|SystemExceptions.ReadOnlyObject|SystemExceptions.SecurityError|SystemExceptions.ShouldNotImplement|SystemExceptions.SubclassResponsibility|SystemExceptions.UnhandledException|SystemExceptions.UserInterrupt|SystemExceptions.VMError|SystemExceptions.VerificationError|SystemExceptions.WrongArgumentCount|SystemExceptions.WrongClass|SystemExceptions.WrongMessageSent|TextCollector|Time|True|UndefinedObject|UnicodeCharacter|UnicodeString|VFS.ArchiveFile|VFS.ArchiveMember|VFS.FileWrapper|VFS.StoredZipMember|VFS.TmpFileArchiveMember|VFS.ZipFile|ValueAdaptor|ValueHolder|VariableBinding|VersionableObjectProxy|Warning|WeakArray|WeakIdentitySet|WeakKeyDictionary|WeakKeyIdentityDictionary|WeakSet|WeakValueIdentityDictionary|WeakValueLookupTable|WordArray|WriteStream|ZeroDivide)\b</string>
 					<key>name</key>
 					<string>support.class.base.smalltalk</string>
-				</dict>
-				<dict>
-					<key>match</key>
-					<string>\b(Character|String|Boolean|Array|OrderedCollection|Dictionary|Random|Float|Double|Fraction|FixedPoint|Integer|SmallInteger|LargeInteger)\b</string>
-					<key>name</key>
-					<string>support.class.type.smalltalk</string>
-				</dict>
-				<dict>
-					<key>match</key>
-					<string>\b(SharedQueue|Semaphore|Future|LazyValue)\b</string>
-					<key>name</key>
-					<string>support.class.threading.smalltalk</string>
 				</dict>
 				<dict>
 					<key>match</key>
