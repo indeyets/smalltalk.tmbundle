@@ -13,73 +13,106 @@
 	<key>keyEquivalent</key>
 	<string>^~G</string>
 	<key>name</key>
-	<string>GNU Smalltalk (old)</string>
+	<string>GNU Smalltalk</string>
 	<key>patterns</key>
 	<array>
 		<dict>
 			<key>begin</key>
-			<string>^(!([A-Z][A-Za-z0-9]+)(?: class)? methodsFor: '(.*)'!)$</string>
+			<string>([a-zA-Z]+)\ssubclass:\s([a-zA-Z]+)\s\[</string>
 			<key>captures</key>
 			<dict>
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>meta.declaration.methods.section.name.smalltalk</string>
+					<string>entity.other.inherited-class.smalltalk</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.class.smalltalk</string>
-				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>entity.name.section.smalltalk</string>
+					<string>entity.name.type.class.smalltalk</string>
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>^!(?:\s!)?$</string>
+			<string>]</string>
 			<key>name</key>
-			<string>meta.declaration.methods.section.smalltalk</string>
+			<string>meta.class.smalltalk</string>
 			<key>patterns</key>
 			<array>
 				<dict>
+					<key>include</key>
+					<string>#localvars</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comments</string>
+				</dict>
+				<dict>
 					<key>begin</key>
-					<string>^((?:(?:\s*([a-z0-9][a-zA-Z0-9]*:)\s([a-z0-9][a-zA-Z0-9]*))+(?:\s([a-z0-9][a-zA-Z0-9]*))?|\s+([a-z0-9][a-zA-Z0-9]*)))\s*$</string>
+					<string>([a-zA-Z0-9]+)\s(:=)\s</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>meta.declaration.methods.method.name.smalltalk</string>
+							<string>variable.class.smalltalk</string>
 						</dict>
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>entity.name.function.smalltalk</string>
+							<string>keyword.operator.assignment.smalltalk</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>\.</string>
+					<key>name</key>
+					<string>meta.declaration.variable.class.smalltalk</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(?:([A-Za-z]+) class &gt;&gt; )?((?:(?:\s*([a-z0-9][a-zA-Z0-9]*:)\s([a-z0-9][a-zA-Z0-9]*))+(?:\s([a-z0-9][a-zA-Z0-9]*))?|\s+([a-z0-9][a-zA-Z0-9]*)))\s*\[</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.class.smalltalk</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>meta.declaration.methods.method.name.smalltalk</string>
 						</dict>
 						<key>3</key>
 						<dict>
 							<key>name</key>
-							<string>variable.parameter.smalltalk</string>
+							<string>entity.name.function.smalltalk</string>
 						</dict>
 						<key>4</key>
 						<dict>
 							<key>name</key>
-							<string>entity.name.function.smalltalk</string>
+							<string>variable.parameter.smalltalk</string>
 						</dict>
 						<key>5</key>
 						<dict>
 							<key>name</key>
 							<string>entity.name.function.smalltalk</string>
 						</dict>
+						<key>6</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.smalltalk</string>
+						</dict>
 					</dict>
 					<key>end</key>
-					<string>^\s*!$</string>
+					<string>]</string>
 					<key>name</key>
 					<string>meta.declaration.methods.method.smalltalk</string>
 					<key>patterns</key>
 					<array>
+						<dict>
+							<key>include</key>
+							<string>#comments</string>
+						</dict>
 						<dict>
 							<key>include</key>
 							<string>#method_def</string>
@@ -109,10 +142,8 @@
 			</array>
 		</dict>
 		<dict>
-			<key>match</key>
-			<string>!</string>
-			<key>name</key>
-			<string>punctuation.section.scope.smalltalk</string>
+			<key>include</key>
+			<string>#comments</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -152,6 +183,51 @@
 					<string>\b([A-Z][A-Za-z0-9]+)\b</string>
 					<key>name</key>
 					<string>entity.name.class.smalltalk</string>
+				</dict>
+			</array>
+		</dict>
+		<key>comments</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>"</string>
+					<key>end</key>
+					<string>"</string>
+					<key>name</key>
+					<string>comment.smalltalk</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>&lt;comment:</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.begin.smalltalk</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>&gt;</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.end.smalltalk</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>comment.smalltalk.class</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#strings</string>
+						</dict>
+					</array>
 				</dict>
 			</array>
 		</dict>
@@ -219,7 +295,7 @@
 				</dict>
 			</array>
 		</dict>
-		<key>method_def</key>
+		<key>localvars</key>
 		<dict>
 			<key>patterns</key>
 			<array>
@@ -245,6 +321,16 @@
 							<string>variable.other.block.smalltalk</string>
 						</dict>
 					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>method_def</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#localvars</string>
 				</dict>
 				<dict>
 					<key>match</key>
@@ -380,14 +466,6 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>"</string>
-					<key>end</key>
-					<string>"</string>
-					<key>name</key>
-					<string>comment.smalltalk</string>
-				</dict>
-				<dict>
-					<key>begin</key>
 					<string>'</string>
 					<key>beginCaptures</key>
 					<dict>
@@ -488,6 +566,6 @@
 	<key>scopeName</key>
 	<string>source.smalltalk.gnu</string>
 	<key>uuid</key>
-	<string>8D5B0A47-F312-4E18-84FB-7186E302726F</string>
+	<string>86991D7E-6E4C-4C40-8ED2-CF52AD0F5DFE</string>
 </dict>
 </plist>
