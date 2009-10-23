@@ -7,9 +7,9 @@
 		<string>st</string>
 	</array>
 	<key>foldingStartMarker</key>
-	<string>^\s*![A-Z]</string>
+	<string>\s\[$</string>
 	<key>foldingStopMarker</key>
-	<string>^\s*!(?:\s!)?\s*$</string>
+	<string>\]</string>
 	<key>keyEquivalent</key>
 	<string>^~G</string>
 	<key>name</key>
@@ -36,6 +36,66 @@
 			<string>]</string>
 			<key>name</key>
 			<string>meta.class.smalltalk</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#classbody</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>([a-zA-Z]+)\sextend\s\[</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.type.class.smalltalk</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>]</string>
+			<key>name</key>
+			<string>meta.class.extension.smalltalk</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#classbody</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#comments</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#operators</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#constants</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#strings</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#classes</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#methods</string>
+		</dict>
+	</array>
+	<key>repository</key>
+	<dict>
+		<key>classbody</key>
+		<dict>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -69,7 +129,7 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>(?:([A-Za-z]+) class &gt;&gt; )?((?:(?:\s*([a-z0-9][a-zA-Z0-9]*:)\s([a-z0-9][a-zA-Z0-9]*))+(?:\s([a-z0-9][a-zA-Z0-9]*))?|\s+([a-z0-9][a-zA-Z0-9]*)))\s*\[</string>
+					<string>^\s*(?:([A-Za-z]+) class &gt;&gt; )((?:(?:\s*([a-z0-9][a-zA-Z0-9]*:)\s([a-z0-9][a-zA-Z0-9]*))+(?:\s([a-z0-9][a-zA-Z0-9]*))?)|(?:([a-z0-9][a-zA-Z0-9]*)))\s*\[</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
@@ -106,68 +166,60 @@
 					<key>end</key>
 					<string>]</string>
 					<key>name</key>
+					<string>meta.declaration.methods.method.static.smalltalk</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#methodbody</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>^\s*((?:(?:\s*([a-z0-9][a-zA-Z0-9]*:)\s([a-z0-9][a-zA-Z0-9]*))+(?:\s([a-z0-9][a-zA-Z0-9]*))?)|(?:([a-z0-9][a-zA-Z0-9]*)))\s*\[</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>meta.declaration.methods.method.name.smalltalk</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.smalltalk</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>variable.parameter.smalltalk</string>
+						</dict>
+						<key>4</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.smalltalk</string>
+						</dict>
+						<key>5</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.smalltalk</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>]</string>
+					<key>name</key>
 					<string>meta.declaration.methods.method.smalltalk</string>
 					<key>patterns</key>
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#comments</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#method_def</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#operators</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#constants</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#strings</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#classes</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#methods</string>
+							<string>#methodbody</string>
 						</dict>
 					</array>
 				</dict>
 			</array>
 		</dict>
-		<dict>
-			<key>include</key>
-			<string>#comments</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#operators</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#constants</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#strings</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#classes</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#methods</string>
-		</dict>
-	</array>
-	<key>repository</key>
-	<dict>
 		<key>classes</key>
 		<dict>
 			<key>patterns</key>
@@ -343,6 +395,71 @@
 					<string>\b(super|self|thisContext)\b</string>
 					<key>name</key>
 					<string>variable.language.smalltalk</string>
+				</dict>
+			</array>
+		</dict>
+		<key>methodbody</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>&lt;category:</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.begin.smalltalk</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>&gt;</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.end.smalltalk</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>comment.smalltalk.category</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#strings</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comments</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#method_def</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#operators</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#constants</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#strings</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#classes</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#methods</string>
 				</dict>
 			</array>
 		</dict>
