@@ -94,38 +94,87 @@
 	</array>
 	<key>repository</key>
 	<dict>
+		<key>block</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>\[</string>
+					<key>end</key>
+					<string>]</string>
+					<key>name</key>
+					<string>meta.declaration.block</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>begin</key>
+							<string>(?&lt;=\[):(?=[a-zA-Z][a-zA-Z0-9]*\s)</string>
+							<key>end</key>
+							<string>\|</string>
+							<key>name</key>
+							<string>meta.declaration.parameters.smalltalk.block</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>captures</key>
+									<dict>
+										<key>1</key>
+										<dict>
+											<key>name</key>
+											<string>punctuation.marker.variable.smalltalk</string>
+										</dict>
+									</dict>
+									<key>match</key>
+									<string>(:)?[a-zA-Z][a-zA-Z0-9]*</string>
+									<key>name</key>
+									<string>variable.parameter.smalltalk</string>
+								</dict>
+							</array>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#comments</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#constants</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#strings</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#classes</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#methods</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#localvars</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#block</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#operators</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
 		<key>classbody</key>
 		<dict>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#localvars</string>
-				</dict>
-				<dict>
-					<key>include</key>
 					<string>#comments</string>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>([a-zA-Z0-9]+)\s(:=)\s</string>
-					<key>captures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>variable.class.smalltalk</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>keyword.operator.assignment.smalltalk</string>
-						</dict>
-					</dict>
-					<key>end</key>
-					<string>\.</string>
-					<key>name</key>
-					<string>meta.declaration.variable.class.smalltalk</string>
 				</dict>
 				<dict>
 					<key>begin</key>
@@ -177,7 +226,7 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>^\s*((?:(?:\s*([a-z0-9][a-zA-Z0-9]*:)\s([a-z0-9][a-zA-Z0-9]*))+(?:\s([a-z0-9][a-zA-Z0-9]*))?)|(?:([a-z0-9][a-zA-Z0-9]*)))\s*\[</string>
+					<string>^\s*((?:\s*([a-z0-9][a-zA-Z0-9]*:)\s([a-z0-9][a-zA-Z0-9]*))+)\s*\[</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
@@ -195,21 +244,11 @@
 							<key>name</key>
 							<string>variable.parameter.smalltalk</string>
 						</dict>
-						<key>4</key>
-						<dict>
-							<key>name</key>
-							<string>entity.name.function.smalltalk</string>
-						</dict>
-						<key>5</key>
-						<dict>
-							<key>name</key>
-							<string>entity.name.function.smalltalk</string>
-						</dict>
 					</dict>
 					<key>end</key>
 					<string>]</string>
 					<key>name</key>
-					<string>meta.declaration.methods.method.smalltalk</string>
+					<string>meta.declaration.methods.method.smalltalk.keyword</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -217,6 +256,82 @@
 							<string>#methodbody</string>
 						</dict>
 					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>^\s*([a-z0-9][a-zA-Z0-9]*)\s*\[</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>meta.declaration.methods.method.name.smalltalk</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>]</string>
+					<key>name</key>
+					<string>meta.declaration.methods.method.smalltalk.unary</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#methodbody</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>([^a-zA-Z0-9]{1,2})\s*([a-z0-9][a-zA-Z0-9]*)\s*\[</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>meta.declaration.methods.method.name.smalltalk</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>variable.parameter.smalltalk</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>]</string>
+					<key>name</key>
+					<string>meta.declaration.methods.method.smalltalk.binary</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#methodbody</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#localvars</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>([a-zA-Z0-9]+)\s(:=)\s</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>variable.class.smalltalk</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.assignment.smalltalk</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>\.</string>
+					<key>name</key>
+					<string>meta.declaration.variable.class.smalltalk</string>
 				</dict>
 			</array>
 		</dict>
@@ -460,6 +575,10 @@
 				<dict>
 					<key>include</key>
 					<string>#methods</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#block</string>
 				</dict>
 			</array>
 		</dict>
